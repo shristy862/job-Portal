@@ -4,9 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "nodemon index.js",
+    "start": "nodemon index.js",
     "lint": "next lint"
   },
   "dependencies": {
