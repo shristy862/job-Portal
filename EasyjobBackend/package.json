@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "nodemon index.js",
-    "lint": "next lint"
+   "dev": "nodemon index.js",  
+    "start": "next start",     
+    "build": "next build",     
+    "lint": "next lint",        
+    "backend": "nodemon index.js" 
   },
   "dependencies": {
     "dotenv": "^16.4.5",
