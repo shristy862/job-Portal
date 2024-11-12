@@ -4,13 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-   "dev": "nodemon index.js",  
-    "start": "next start",     
-    "build": "next build",     
-    "lint": "next lint",        
-    "backend": "nodemon index.js" 
+    "dev": "nodemon index.js",
+    "start": "next start",
+    "build": "next build",
+    "lint": "next lint",
+    "backend": "nodemon index.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mongodb": "^6.10.0",
