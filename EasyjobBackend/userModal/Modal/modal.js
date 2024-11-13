@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   },
   userType: { 
     type: String, 
-    enum: ['candidate', 'company','Hiring','administration', 'superadmin','platformSuperHR','platformJrHr', 'other'], 
+    enum: ['candidate', 'company','HiringManager','administration', 'superadmin','platformSuperHR','platformJrHr', 'other'], 
     required: true 
   },
   addedBy: {
