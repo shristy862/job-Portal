@@ -25,5 +25,8 @@
   "description": "Backend For easyjobapp",
   "main": "index.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+  "node": "18.x"
+}
 }
