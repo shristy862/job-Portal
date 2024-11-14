@@ -2,8 +2,7 @@ import User from '../../../userModal/Modal/modal.js';
 
 export const updatePersonalDetails = async (req, res) => {
     const candidateId = req.params.id; 
-
-    // Destructure the personal details from the request body
+    console.log(' here is the id from url ', candidateId);
     const { firstName, lastName, phoneNo, photo, cv, links } = req.body;
 
     try {
