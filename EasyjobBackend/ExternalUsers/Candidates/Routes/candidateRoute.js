@@ -13,6 +13,6 @@ router.post('/login' , loginCandidate);
 router.get('/dashboard', authenticateToken, getCandidateDashboard);
 
 // Personal details route
-router.use('/:id/complete-profile', personalDetailsRoutes);
+router.use('/complete-profile', personalDetailsRoutes);
 
 export default router;
