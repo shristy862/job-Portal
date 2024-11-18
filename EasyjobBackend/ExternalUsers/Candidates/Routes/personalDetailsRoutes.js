@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { updatePersonalDetails } from '../Controllers/personalDetailsControllers.js';
 import { authenticateToken } from '../../../Middleware/verifyToken.js';
-import { upload } from '../../../Services/uploadConfig.js';
+import { upload } from '../../../Connections/uploadConfig.js';
 const router = Router();
 
 // Route for updating personal details

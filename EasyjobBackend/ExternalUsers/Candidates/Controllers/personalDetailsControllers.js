@@ -1,5 +1,5 @@
+
 import User from '../../../userModal/Modal/modal.js';
-import { s3 } from '../../../Connections/aws-config.js';
 
 export const updatePersonalDetails = async (req, res) => {
     const candidateId = req.params.id; 
@@ -33,6 +33,7 @@ export const updatePersonalDetails = async (req, res) => {
             console.log('File uploaded to S3, location:', req.file.location);
             candidateUser.cv = req.file.location;  
         }
+        console.log('Uploaded file info:', req.file);
 
         // Save the updated user details
         await candidateUser.save();
