@@ -1,4 +1,13 @@
 import mongoose from 'mongoose';
+// saving user's personal Details as an embedded document 
+const personalDetailsSchema = new mongoose.Schema({
+  firstName: { type: String, required: false },
+  lastName: { type: String, required: false },
+  phoneNo: { type: String, required: false },
+  photo: { type: String, required: false },
+  cv: { type: String, required: false },
+  links: [{ type: String, required: false }],
+}, { _id: false }); 
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -23,26 +32,7 @@ const userSchema = new mongoose.Schema({
     default: false
   },
   // Personal details fields for candidates
-  firstName: {
-    type: String,
-    required: false
-  },
-  lastName: {
-    type: String,
-    required: false
-  },
-  photo: {
-    type: String,
-    required: false
-  },
-  cv: {
-    type: String,
-    required: false
-  },
-  links: [{
-    type: String,
-    required: false
-  }],
+  personalDetails: personalDetailsSchema,
   // Company profile fields
   phoneNo: {
     type: String,

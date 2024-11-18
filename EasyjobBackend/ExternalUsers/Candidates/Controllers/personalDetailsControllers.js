@@ -1,11 +1,12 @@
-
 import User from '../../../userModal/Modal/modal.js';
 
 export const updatePersonalDetails = async (req, res) => {
     const candidateId = req.params.id; 
+
     console.log('Received ID from URL:', candidateId);
     console.log('Request body:', req.body);
     console.log('Uploaded file:', req.file); // To verify file upload
+
     const { firstName, lastName, phoneNo, photo, cv, links } = req.body;
 
     try {
@@ -22,18 +23,21 @@ export const updatePersonalDetails = async (req, res) => {
 
         console.log('User found:', candidateUser);
 
-        // Update candidate details
-        candidateUser.firstName = firstName || candidateUser.firstName;
-        candidateUser.lastName = lastName || candidateUser.lastName;
-        candidateUser.phoneNo = phoneNo || candidateUser.phoneNo;
-        candidateUser.photo = photo || candidateUser.photo;
-        candidateUser.links = links || candidateUser.links;
+       candidateUser.personalDetails = {
+            ...candidateUser.personalDetails, // Retain existing data
+            firstName: firstName || candidateUser.personalDetails?.firstName,
+            lastName: lastName || candidateUser.personalDetails?.lastName,
+            phoneNo: phoneNo || candidateUser.personalDetails?.phoneNo,
+            photo: photo || candidateUser.personalDetails?.photo,
+            links: links || candidateUser.personalDetails?.links,
+        };
 
         if (req.file) {
             console.log('File uploaded to S3, location:', req.file.location);
             candidateUser.cv = req.file.location;  
         }
         console.log('Uploaded file info:', req.file);
+        console.log('Updated personalDetails:', candidateUser.personalDetails);
 
         // Save the updated user details
         await candidateUser.save();
