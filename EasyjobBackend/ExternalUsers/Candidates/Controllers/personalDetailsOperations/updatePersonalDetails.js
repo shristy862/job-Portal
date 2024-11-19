@@ -2,7 +2,7 @@ import User from '../../../../userModal/Modal/modal.js';
 
 export const updatePersonalDetails = async (req, res) => {
     const candidateId = req.params.id;
-    const updates = req.body; // Assuming the array of updates is directly sent as the body
+    const { firstName, lastName, phoneNo, links, city, gender, languages } = req.body;
 
     try {
         const candidateUser = await User.findOne({ _id: candidateId, userType: 'candidate' });
@@ -11,22 +11,23 @@ export const updatePersonalDetails = async (req, res) => {
             return res.status(404).json({ message: 'Candidate user not found' });
         }
 
+        // Ensure `personalDetails` exists
+        if (!candidateUser.personalDetails) {
+            candidateUser.personalDetails = {};
+        }
+
         // Extract uploaded file URLs
         const cvUrl = req.files?.cv?.[0]?.location || null; 
         const photoUrl = req.files?.photo?.[0]?.location || null; 
 
-        // Iterate through the updates array and apply changes
-        updates.forEach(update => {
-            if (update.key === 'firstName') candidateUser.personalDetails.firstName = update.value;
-            if (update.key === 'lastName') candidateUser.personalDetails.lastName = update.value;
-            if (update.key === 'phoneNo') candidateUser.personalDetails.phoneNo = update.value;
-            if (update.key === 'links') candidateUser.personalDetails.links = update.value.split(',').map(link => link.trim()); // Handle comma-separated links
-            if (update.key === 'city') candidateUser.personalDetails.city = update.value;
-            if (update.key === 'gender') candidateUser.personalDetails.gender = update.value;
-            if (update.key === 'languages') candidateUser.personalDetails.languages = update.value;
-        });
-
-        // If file URLs are provided, update them
+        // Update only the fields that are provided
+        if (firstName) candidateUser.personalDetails.firstName = firstName;
+        if (lastName) candidateUser.personalDetails.lastName = lastName;
+        if (phoneNo) candidateUser.personalDetails.phoneNo = phoneNo;
+        if (links) candidateUser.personalDetails.links = links.split(',').map((link) => link.trim()); // Handle comma-separated links
+        if (city) candidateUser.personalDetails.city = city;
+        if (gender) candidateUser.personalDetails.gender = gender;
+        if (languages) candidateUser.personalDetails.languages = languages;
         if (cvUrl) candidateUser.personalDetails.cv = cvUrl;
         if (photoUrl) candidateUser.personalDetails.photo = photoUrl;
 
