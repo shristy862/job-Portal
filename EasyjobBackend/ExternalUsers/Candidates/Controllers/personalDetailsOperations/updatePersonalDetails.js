@@ -1,4 +1,4 @@
-import User from '../../../userModal/Modal/modal.js';
+import User from '../../../../userModal/Modal/modal.js';
 
 export const updatePersonalDetails = async (req, res) => {
     const candidateId = req.params.id;
@@ -7,7 +7,17 @@ export const updatePersonalDetails = async (req, res) => {
     console.log('Request body:', req.body);
     console.log('Uploaded file:', req.file); // To verify file upload
 
-    const { firstName, lastName, phoneNo, photo, links } = req.body;
+    // Destructure fields from the request body
+    const { 
+        firstName, 
+        lastName, 
+        phoneNo, 
+        photo, 
+        links, 
+        city, 
+        gender, 
+        languages 
+    } = req.body;
 
     try {
         console.log("Finding user with ID:", candidateId);
@@ -31,6 +41,9 @@ export const updatePersonalDetails = async (req, res) => {
             phoneNo: phoneNo || candidateUser.personalDetails?.phoneNo,
             photo: photo || candidateUser.personalDetails?.photo,
             links: links || candidateUser.personalDetails?.links,
+            city: city || candidateUser.personalDetails?.city,
+            gender: gender || candidateUser.personalDetails?.gender,
+            languages: languages || candidateUser.personalDetails?.languages,
             cv: req.file?.location || candidateUser.personalDetails?.cv, // Update cv if file is uploaded
         };
 
@@ -44,7 +57,7 @@ export const updatePersonalDetails = async (req, res) => {
 
         res.status(200).json({
             message: 'Personal details updated successfully!',
-            personalDetails: candidateUser,
+            personalDetails: candidateUser.personalDetails,
         });
     } catch (error) {
         console.error('Error in updating personal details:', error);

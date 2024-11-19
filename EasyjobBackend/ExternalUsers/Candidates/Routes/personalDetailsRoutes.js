@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { updatePersonalDetails } from '../Controllers/personalDetailsControllers.js';
+import { updatePersonalDetails } from '../Controllers/personalDetailsOperations/updatePersonalDetails.js';
 import {getPersonalDetails} from '../Controllers/personalDetailsOperations/getPersonalDetails.js'
 import { deletePersonalDetails} from '../Controllers/personalDetailsOperations/deletePersonalDetails.js'
 import { authenticateToken } from '../../../Middleware/verifyToken.js';
