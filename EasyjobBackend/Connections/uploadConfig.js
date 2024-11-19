@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Create an S3 client using AWS SDK v3
+// create S3 client using AWS SDK v3
 const s3 = new S3Client({
     region: process.env.AWS_REGION,
     credentials: {
@@ -23,14 +23,15 @@ const upload = multer({
             cb(null, { fieldName: file.fieldname });
         },
         key: (req, file, cb) => {
+            const folder = file.fieldname === 'cv' ? 'cvs' : 'photos';
             // Generate a unique filename with the current timestamp
-            cb(null, `cvs/${Date.now().toString()}-${file.originalname}`);
+            cb(null, `${folder}/${Date.now().toString()}-${file.originalname}`);
         },
-        // Remove ACL from the upload (by setting ACL to null or undefined)
-        acl: undefined
     }),
-    limits: { fileSize: 1024 * 1024 * 5 },  // 5 MB file size limit
-});
+    limits: { fileSize: 1024 * 1024 * 5 }, // 5 MB file size limit
+}).fields([
+    { name: 'cv', maxCount: 1 }, 
+    { name: 'photo', maxCount: 1 }, 
+]);
 
-// Export the upload middleware and s3 client
 export { upload, s3 };

@@ -7,6 +7,9 @@ const personalDetailsSchema = new mongoose.Schema({
   photo: { type: String, required: false },
   cv: { type: String, required: false },
   links: [{ type: String, required: false }],
+  gender: { type: String, required: false },
+  city: { type: String, required: false },
+  languages: { type: String, required: false },
 }, { _id: false }); 
 
 const userSchema = new mongoose.Schema({

@@ -2,65 +2,43 @@ import User from '../../../../userModal/Modal/modal.js';
 
 export const updatePersonalDetails = async (req, res) => {
     const candidateId = req.params.id;
-
-    console.log('Received ID from URL:', candidateId);
-    console.log('Request body:', req.body);
-    console.log('Uploaded file:', req.file); // To verify file upload
-
-    // Destructure fields from the request body
-    const { 
-        firstName, 
-        lastName, 
-        phoneNo, 
-        photo, 
-        links, 
-        city, 
-        gender, 
-        languages 
-    } = req.body;
+    const updates = req.body; // Assuming the array of updates is directly sent as the body
 
     try {
-        console.log("Finding user with ID:", candidateId);
-
-        // Find user by candidateId and check userType
         const candidateUser = await User.findOne({ _id: candidateId, userType: 'candidate' });
 
-        // If user not found or not a candidate
         if (!candidateUser) {
-            console.error('Candidate user not found');
             return res.status(404).json({ message: 'Candidate user not found' });
         }
 
-        console.log('User found:', candidateUser);
+        // Extract uploaded file URLs
+        const cvUrl = req.files?.cv?.[0]?.location || null; 
+        const photoUrl = req.files?.photo?.[0]?.location || null; 
 
-        // Update the personalDetails field
-        candidateUser.personalDetails = {
-            ...candidateUser.personalDetails, // Retain existing data
-            firstName: firstName || candidateUser.personalDetails?.firstName,
-            lastName: lastName || candidateUser.personalDetails?.lastName,
-            phoneNo: phoneNo || candidateUser.personalDetails?.phoneNo,
-            photo: photo || candidateUser.personalDetails?.photo,
-            links: links || candidateUser.personalDetails?.links,
-            city: city || candidateUser.personalDetails?.city,
-            gender: gender || candidateUser.personalDetails?.gender,
-            languages: languages || candidateUser.personalDetails?.languages,
-            cv: req.file?.location || candidateUser.personalDetails?.cv, // Update cv if file is uploaded
-        };
+        // Iterate through the updates array and apply changes
+        updates.forEach(update => {
+            if (update.key === 'firstName') candidateUser.personalDetails.firstName = update.value;
+            if (update.key === 'lastName') candidateUser.personalDetails.lastName = update.value;
+            if (update.key === 'phoneNo') candidateUser.personalDetails.phoneNo = update.value;
+            if (update.key === 'links') candidateUser.personalDetails.links = update.value.split(',').map(link => link.trim()); // Handle comma-separated links
+            if (update.key === 'city') candidateUser.personalDetails.city = update.value;
+            if (update.key === 'gender') candidateUser.personalDetails.gender = update.value;
+            if (update.key === 'languages') candidateUser.personalDetails.languages = update.value;
+        });
 
-        console.log('Uploaded file info:', req.file);
-        console.log('Updated personalDetails:', candidateUser.personalDetails);
+        // If file URLs are provided, update them
+        if (cvUrl) candidateUser.personalDetails.cv = cvUrl;
+        if (photoUrl) candidateUser.personalDetails.photo = photoUrl;
 
         // Save the updated user details
         await candidateUser.save();
-
-        console.log('User details updated successfully:', candidateUser);
 
         res.status(200).json({
             message: 'Personal details updated successfully!',
             personalDetails: candidateUser.personalDetails,
         });
     } catch (error) {
-        console.error('Error in updating personal details:', error);
+        console.error('Error updating personal details:', error);
         res.status(500).json({ message: 'Server error' });
     }
 };

@@ -8,8 +8,12 @@ import { upload } from '../../../Connections/uploadConfig.js';
 const router = Router();
 
 // Route for updating personal details
-router.put('/:id/personalDetails', upload.single('cv'),authenticateToken, updatePersonalDetails);
-
+router.put(
+    '/:id/personalDetails', 
+    upload, 
+    authenticateToken,
+    updatePersonalDetails 
+);
 // Route for getting personal details
 router.get('/:id/personal-details/view', authenticateToken, getPersonalDetails);
 
