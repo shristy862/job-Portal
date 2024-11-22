@@ -3,6 +3,7 @@ import { loginCandidate } from '../Controllers/loginController.js';
 import { getCandidateDashboard } from '../Controllers/dashboardController.js';
 import { authenticateToken } from '../../../Middleware/verifyToken.js';
 import  personalDetailsRoutes from './personalDetailsRoutes.js'; 
+import educationRoutes from './educationDetailsRoute.js';
 
 const router = Router();
 
@@ -14,5 +15,8 @@ router.get('/dashboard', authenticateToken, getCandidateDashboard);
 
 // Personal details route
 router.use('/complete-profile', personalDetailsRoutes);
+
+// Education details route
+router.use('/complete-profile', educationRoutes);
 
 export default router;
