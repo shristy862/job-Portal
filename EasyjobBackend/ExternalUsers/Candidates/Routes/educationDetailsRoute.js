@@ -6,7 +6,7 @@ import { authenticateToken } from '../../../Middleware/verifyToken.js';
 
 const router = Router();
 
-// Route for updating educational details
+// Route for adding educational details
 router.put(
     '/:id/educational-details',
     authenticateToken,

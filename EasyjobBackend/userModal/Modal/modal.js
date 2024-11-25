@@ -68,6 +68,11 @@ const educationalDetailsSchema = new mongoose.Schema({
 
 }, { _id: false });
 
+const careerObjectiveSchema = new mongoose.Schema({
+  type: String,
+}, { timestamps: true });
+
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -95,7 +100,8 @@ const userSchema = new mongoose.Schema({
   personalDetails: personalDetailsSchema,
   // Educational details array for candidates
   educationalDetails: [educationalDetailsSchema],
-  
+  // CareerObjective details for candidates
+  careerObjective: { type: String },
   // Company profile fields
   phoneNo: {
     type: String,
