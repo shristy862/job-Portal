@@ -20,7 +20,7 @@ app.use(express.json());
 connectDB();
 
 app.get('/', (req, res) => {
-  res.send('welcome to User API');
+  res.send('Hello, Elastic Beanstalk!');
 });
 
 app.use('/api', userRoutes);
