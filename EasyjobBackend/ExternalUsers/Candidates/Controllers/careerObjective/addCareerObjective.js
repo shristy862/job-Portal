@@ -1,9 +1,16 @@
+import mongoose from 'mongoose';
 import User from '../../../../userModal/Modal/modal.js';
 
 export const addCareerObjective = async (req, res) => {
     console.log('req.params:', req.params); 
     const candidateId = req.params.id;
     console.log('Extracted Candidate ID:', candidateId);
+
+    // Validate the candidateId 
+    if (!mongoose.Types.ObjectId.isValid(candidateId)) {
+        return res.status(400).json({ message: 'Invalid candidate ID' });
+    }
+
     const { careerObjective } = req.body;
 
     try {
@@ -12,7 +19,7 @@ export const addCareerObjective = async (req, res) => {
             return res.status(400).json({ message: 'Career objective is required' });
         }
 
-        // Find the candidate and update the career objective
+        // Find the candidate 
         const candidateUser = await User.findOneAndUpdate(
             { _id: candidateId, userType: 'candidate' },
             { careerObjective },

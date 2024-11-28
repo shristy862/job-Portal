@@ -1,8 +1,8 @@
 import User from '../../../../userModal/Modal/modal.js';
 
 export const updateEducationalDetails = async (req, res) => {
-    const candidateId = req.params.id; // Candidate ID from params
-    const { type, ...updatedFields } = req.body; // Education type and fields to update
+    const candidateId = req.params.id; 
+    const { type, ...updatedFields } = req.body; 
 
     try {
         // Find the candidate

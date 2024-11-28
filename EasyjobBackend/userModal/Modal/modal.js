@@ -72,6 +72,45 @@ const careerObjectiveSchema = new mongoose.Schema({
   type: String,
 }, { timestamps: true });
 
+const workExperienceSchema = new mongoose.Schema(
+  {
+    designation: { 
+      type: String, 
+      required: true 
+    },
+    profile: { 
+      type: String, 
+      required: true 
+    },
+    organizationName: { 
+      type: String, 
+      required: true 
+    },
+    location: { 
+      type: String, 
+      required: true 
+    },
+    jobType: { 
+      type: String, 
+      enum: ['job', 'internship'], 
+      required: true 
+    },
+    mode: { 
+      type: String, 
+      enum: ['online', 'in-office', 'hybrid'], 
+      required: true 
+    },
+    startDate: { 
+      type: Date, 
+      required: true 
+    },
+    endDate: { 
+      type: Date, 
+      required: true 
+    },
+  },
+  { _id: false } // Disable the _id field for embedded documents
+);
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -102,6 +141,8 @@ const userSchema = new mongoose.Schema({
   educationalDetails: [educationalDetailsSchema],
   // CareerObjective details for candidates
   careerObjective: { type: String },
+  // Work Exp details for candidates
+  workExperience: [workExperienceSchema],
   // Company profile fields
   phoneNo: {
     type: String,

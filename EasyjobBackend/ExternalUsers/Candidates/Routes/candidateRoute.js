@@ -5,6 +5,7 @@ import { authenticateToken } from '../../../Middleware/verifyToken.js';
 import  personalDetailsRoutes from './personalDetailsRoutes.js'; 
 import educationRoutes from './educationDetailsRoute.js';
 import careerObjectiveRoutes from './careerObjectiveRoutes.js'; 
+import workExperienceRoutes from './workExpRoutes.js';
 
 const router = Router();
 
@@ -22,5 +23,7 @@ router.use('/complete-profile', educationRoutes);
 
 // CareerObjective  route
 router.use('/complete-profile', careerObjectiveRoutes);
+
+router.use('/complete-profile', workExperienceRoutes);
 
 export default router;

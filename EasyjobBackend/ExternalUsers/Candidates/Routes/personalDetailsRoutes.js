@@ -8,7 +8,7 @@ import { upload } from '../../../Connections/uploadConfig.js';
 const router = Router();
 
 // Route for updating personal details
-router.put(
+router.post(
     '/:id/personalDetails', 
     upload, 
     authenticateToken,
