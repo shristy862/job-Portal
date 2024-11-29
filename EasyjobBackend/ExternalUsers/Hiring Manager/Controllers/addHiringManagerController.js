@@ -4,7 +4,6 @@ import { sendEmail } from '../../../Services/emailService.js';
 
 export const addHiringManager = async (req, res) => {
     const { name, email, phone ,userType} = req.body; 
-    console.log(req.body);
     
     const companyId = req.params.companyId; 
     try {

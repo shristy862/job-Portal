@@ -27,7 +27,7 @@ export const addWorkExperience = async (req, res) => {
                     }
                 }
             },
-            { new: true } // Return the updated document
+            { new: true } 
         );
 
         if (!updatedCandidate) {

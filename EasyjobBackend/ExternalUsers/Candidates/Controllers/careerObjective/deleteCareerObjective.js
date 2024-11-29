@@ -1,7 +1,6 @@
 import User from '../../../../userModal/Modal/modal.js';
 
 export const deleteCareerObjective = async (req, res) => {
-    console.log('Career objective delete API hit');
     const candidateId = req.params.id;
 
     try {

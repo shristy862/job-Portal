@@ -5,19 +5,16 @@ export const updateEducationalDetails = async (req, res) => {
     const { type, ...updatedFields } = req.body; 
 
     try {
-        // Find the candidate
         const candidateUser = await User.findOne({ _id: candidateId, userType: 'candidate' });
 
         if (!candidateUser) {
             return res.status(404).json({ message: 'Candidate user not found' });
         }
 
-        // Ensure educationalDetails array exists
         if (!candidateUser.educationalDetails || candidateUser.educationalDetails.length === 0) {
             return res.status(404).json({ message: 'No educational details found for the candidate.' });
         }
 
-        // Find the education detail by type
         const educationDetail = candidateUser.educationalDetails.find((edu) => edu.type === type);
 
         if (!educationDetail) {

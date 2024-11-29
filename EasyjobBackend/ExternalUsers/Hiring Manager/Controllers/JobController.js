@@ -1,6 +1,8 @@
 import User from '../../../userModal/Modal/modal.js';
 import Job from '../Modal/jobModal.js';
+
 export const postJob = async (req, res) => {
+    
     const { title, description, location, requirements } = req.body;
     const hiringManagerId = req.params.id; 
     try {

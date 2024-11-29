@@ -1,12 +1,8 @@
 import mongoose from 'mongoose';
 import User from '../../../../userModal/Modal/modal.js';
 
-console.log('User model imported:', User);
-
 export const deletePersonalDetails = async (req, res) => {
     const candidateId = req.params.id;
-
-    console.log('Received ID from URL for DELETE:', candidateId);
 
     if (!mongoose.Types.ObjectId.isValid(candidateId)) {
         return res.status(400).json({ message: 'Invalid candidate ID' });

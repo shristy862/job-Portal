@@ -1,10 +1,11 @@
 import User from '../../../../userModal/Modal/modal.js'; 
+
 export const deleteWorkExperience = async (req, res) => {
     const candidateId = req.params.candidateId; 
     const { organizationName } = req.body; 
 
     try {
-        // Find the candidate user by ID
+
         const candidateUser = await User.findOne({ _id: candidateId, userType: 'candidate' });
 
         if (!candidateUser) {
@@ -25,13 +26,10 @@ export const deleteWorkExperience = async (req, res) => {
             return res.status(404).json({ message: `No work experience found for organization: ${organizationName}` });
         }
 
-        // Remove the work experience entry
         candidateUser.workExperience.splice(workExperienceIndex, 1);
 
-        // Save the updated candidate user document
         await candidateUser.save();
 
-        // Return a success response
         res.status(200).json({
             message: `Work experience for ${organizationName} removed successfully!`,
         });

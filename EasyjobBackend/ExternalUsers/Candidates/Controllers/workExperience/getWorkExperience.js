@@ -2,7 +2,6 @@ import User from '../../../../userModal/Modal/modal.js';
 
 export const getWorkExperience = async (req, res) => {
   try {
-    console.log('View Work Exp API hit');
     const candidateId = req.params.candidateId;  
 
     const user = await User.findById(candidateId); 
@@ -11,7 +10,6 @@ export const getWorkExperience = async (req, res) => {
       return res.status(404).json({ message: 'No user found with this candidateId' });
     }
 
-    // Get the workExperience 
     const workExperience = user.workExperience;
 
     if (!workExperience || workExperience.length === 0) {

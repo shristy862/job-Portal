@@ -5,7 +5,7 @@ const jobSchema = new mongoose.Schema({
     description: { type: String, required: true },
     location: { type: String, required: true },
     requirements: [{ type: String, required: true }],
-    postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // To link the job to a specific hiring manager
+    postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, 
     createdAt: { type: Date, default: Date.now },
 });
 

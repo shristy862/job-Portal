@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 
 export const getDashboard = async (req, res) => {
     try {
-        // Get token 
         const token = req.header('Authorization').replace('Bearer ', '');
 
         // Verify the token

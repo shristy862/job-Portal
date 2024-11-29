@@ -3,8 +3,6 @@ import User from '../../../../userModal/Modal/modal.js';
 export const getPersonalDetails = async (req, res) => {
     const candidateId = req.params.id;
 
-    console.log('Received ID from URL for GET:', candidateId);
-
     try {
         const candidateUser = await User.findOne({ _id: candidateId, userType: 'candidate' });
 
@@ -13,7 +11,6 @@ export const getPersonalDetails = async (req, res) => {
             return res.status(404).json({ message: 'Candidate user not found' });
         }
 
-        // Check if personalDetails exists
         if (!candidateUser.personalDetails) {
             console.error('Personal details not found for candidate');
             return res.status(404).json({ message: 'Personal details not found' });

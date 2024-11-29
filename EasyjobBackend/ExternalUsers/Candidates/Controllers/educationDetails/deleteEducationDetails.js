@@ -1,18 +1,16 @@
 import User from '../../../../userModal/Modal/modal.js';
 
 export const deleteEducationalDetail = async (req, res) => {
-    console.log('API hit')
     const candidateId = req.params.id; 
     const { type } = req.body; 
     try {
-        // Find the candidate 
+ 
         const candidateUser = await User.findOne({ _id: candidateId, userType: 'candidate' });
 
         if (!candidateUser) {
             return res.status(404).json({ message: 'Candidate user not found' });
         }
 
-        // Ensure the educationalDetails array exists and is not empty
         if (!candidateUser.educationalDetails || candidateUser.educationalDetails.length === 0) {
             return res.status(404).json({ message: 'No educational details found for the candidate.' });
         }
@@ -29,10 +27,8 @@ export const deleteEducationalDetail = async (req, res) => {
         // Remove the educational detail
         candidateUser.educationalDetails.splice(educationIndex, 1);
 
-        // Save the updated user document
         await candidateUser.save();
 
-        // Return a success response
         res.status(200).json({
             message: `Educational detail for type "${type}" removed successfully!`,
         });

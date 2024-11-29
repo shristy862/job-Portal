@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import User from '../../../userModal/Modal/modal.js';
 
 export const loginCandidate = async (req, res) => {
-    console.log("JWT Secret:", process.env.JWT_SECRET);
     const { email, password } = req.body;
 
     try {

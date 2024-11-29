@@ -2,9 +2,7 @@ import mongoose from 'mongoose';
 import User from '../../../../userModal/Modal/modal.js';
 
 export const addCareerObjective = async (req, res) => {
-    console.log('req.params:', req.params); 
     const candidateId = req.params.id;
-    console.log('Extracted Candidate ID:', candidateId);
 
     // Validate the candidateId 
     if (!mongoose.Types.ObjectId.isValid(candidateId)) {
@@ -23,7 +21,7 @@ export const addCareerObjective = async (req, res) => {
         const candidateUser = await User.findOneAndUpdate(
             { _id: candidateId, userType: 'candidate' },
             { careerObjective },
-            { new: true } // Return the updated document
+            { new: true } 
         );
 
         if (!candidateUser) {

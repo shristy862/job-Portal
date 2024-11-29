@@ -11,7 +11,6 @@ export const updatePersonalDetails = async (req, res) => {
             return res.status(404).json({ message: 'Candidate user not found' });
         }
 
-        // Ensure `personalDetails` exists
         if (!candidateUser.personalDetails) {
             candidateUser.personalDetails = {};
         }
@@ -31,7 +30,6 @@ export const updatePersonalDetails = async (req, res) => {
         if (cvUrl) candidateUser.personalDetails.cv = cvUrl;
         if (photoUrl) candidateUser.personalDetails.photo = photoUrl;
 
-        // Save the updated user details
         await candidateUser.save();
 
         res.status(200).json({

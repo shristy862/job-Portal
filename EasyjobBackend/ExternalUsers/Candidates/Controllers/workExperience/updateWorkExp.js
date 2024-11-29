@@ -5,7 +5,6 @@ export const updateWorkExperience = async (req, res) => {
     const { organizationName, ...updatedFields } = req.body; 
 
     try {
-        // Find the candidate user by ID
         const candidateUser = await User.findOne({ _id: candidateId, userType: 'candidate' });
 
         if (!candidateUser) {
@@ -42,10 +41,8 @@ export const updateWorkExperience = async (req, res) => {
             }
         });
 
-        // Save the updated candidate user document
         await candidateUser.save();
 
-        // Return the updated work experience
         res.status(200).json({
             message: 'Work experience updated successfully!',
             updatedWorkExperience: workExperience,

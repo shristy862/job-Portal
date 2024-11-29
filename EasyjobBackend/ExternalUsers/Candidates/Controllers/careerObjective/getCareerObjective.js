@@ -1,7 +1,6 @@
 import User from '../../../../userModal/Modal/modal.js';
 
 export const getCareerObjective = async (req, res) => {
-    console.log('Career objective view API hit');
     const candidateId = req.params.id;
 
     try {

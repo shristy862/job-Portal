@@ -15,7 +15,7 @@ export const completeCompanyProfile = async (req, res) => {
     const companyId =  req.params.id; ; 
 
     try {
-        console.log("Received Request to complete profile with company ID:", companyId);
+        // console.log("Received Request to complete profile with company ID:", companyId);
 
         // Find the user by companyId
         const companyUser = await User.findById(companyId);
@@ -24,7 +24,7 @@ export const completeCompanyProfile = async (req, res) => {
             return res.status(404).json({ message: 'Company user not found' });
         }
 
-        console.log('Received company profile data:', req.body);
+        // console.log('Received company profile data:', req.body);
 
         // Update the company fields 
         companyUser.phoneNo = phoneNo || companyUser.phoneNo;

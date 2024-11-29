@@ -12,8 +12,8 @@ export const loginCompany = async (req, res) => {
             return res.status(404).json({ message: 'Company not found' });
         }
 
-        console.log('Received Password:', password);
-        console.log('Stored Hashed Password:', user.password);
+        // console.log('Received Password:', password);
+        // console.log('Stored Hashed Password:', user.password);
         
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {

@@ -1,7 +1,6 @@
 import User from '../../../../userModal/Modal/modal.js';
 
 export const updateCareerObjective = async (req, res) => {
-    console.log('Career objective update API hit');
     const candidateId = req.params.id; 
     const { careerObjective } = req.body; 
 
