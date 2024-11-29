@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { addEducationalDetails } from '../Controllers/educationDetails/addEduDetails.js';
 import { updateEducationalDetails } from '../Controllers/educationDetails/updateEduDetails.js';
 import { getEducationalDetails } from '../Controllers/educationDetails/getAllEdu.js';
+import { deleteEducationalDetail } from '../Controllers/educationDetails/deleteEducationDetails.js';
 import { authenticateToken } from '../../../Middleware/verifyToken.js';
 
 const router = Router();
@@ -23,6 +24,11 @@ router.get(
     '/:id/educational-details',
     authenticateToken,
     getEducationalDetails
+);
+router.delete(
+    '/:id/educational-details/delete',
+    authenticateToken,
+    deleteEducationalDetail
 );
 
 export default router;
