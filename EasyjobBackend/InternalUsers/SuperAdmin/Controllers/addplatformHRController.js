@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import User from '../../../../EasyjobBackend/userModal/Modal/modal.js';
 
-export const addPlatformSuperHR = async (req, res) => {
+export const addHR = async (req, res) => {
     try {
         const { superAdminId } = req.params;
         console.log('SuperAdminId from params =>', superAdminId); // Debugging line
@@ -21,23 +21,25 @@ export const addPlatformSuperHR = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const platformHR = new User({
+        const hr = new User({
             name,
             email,
             password: hashedPassword,
-            userType: 'platformSuperHR',
-            addedBy:  superAdminId,
+            rawPassword: password, // Save the raw password temporarily
+            userType: 'HR',
+            addedBy: superAdminId,
         });
 
-        await platformHR.save();
+        await hr.save();
 
         res.status(201).json({
-            message: 'PlatformSuperHR created successfully',
+            message: 'HR created successfully',
             platformHR: {
-                id: platformHR._id,
-                name: platformHR.name,
-                email: platformHR.email,
-                userType: platformHR.userType
+                id: hr._id,
+                name: hr.name,
+                email: hr.email,
+                userType: hr.userType,
+                rawPassword: hr.rawPassword, // Return the raw password in the response
             }
         });
     } catch (error) {

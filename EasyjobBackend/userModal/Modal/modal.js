@@ -121,10 +121,13 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  }, rawPassword: { // Add this field to store the raw password temporarily
+    type: String,
+    required: false // Make it optional
   },
   userType: {
     type: String,
-    enum: ['candidate', 'company', 'HiringManager', 'administration', 'superadmin', 'platformSuperHR', 'platformJrHr', 'other'],
+    enum: ['candidate', 'company', 'HiringManager', 'accountant','user' ,'administration', 'superadmin', 'HR', 'platformJrHr', 'other'],
     required: true
   },
   addedBy: {
